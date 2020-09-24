@@ -42,6 +42,17 @@ export default class IbanComponent extends LightningElement {
         return this._value;
     }
 
+    @api validate() {
+        if ((this.value === null && !this.required) || this.isValidIBANNumber(this.value)) {
+            return { isValid: true };
+        } else {
+            return {
+                isValid: false,
+                errorMessage: this.errormessage
+            };
+        }
+    }
+
     renderedCallback() {
         if (this.initiallyRendered) {
             return;
